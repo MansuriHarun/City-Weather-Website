@@ -81,12 +81,19 @@ async function getWeather(latitude, longitude) {
         const response = await fetch(`http://www.7timer.info/bin/api.pl?lon=${longitude}&lat=${latitude}&product=civil&output=json`);
         const data = await response.json();
 
-        // Display weather information
-        weatherInfo.innerHTML = `
-            <h2>Weather in ${citySelect.options[citySelect.selectedIndex].text}</h2>
-            <p>Temperature: ${data.dataseries[0].temp2m}°C</p>
-            <p>Weather: ${data.dataseries[0].weather}</p>
-        `;
+        const cityNameElement = document.getElementById('cityName');
+        const temperatureElement = document.getElementById('temperature');
+        const weatherDescriptionElement = document.getElementById('weatherDescription');
+        const weatherIconElement = document.getElementById('weatherIcon');
+
+        cityNameElement.textContent = citySelect.options[citySelect.selectedIndex].text;
+        temperatureElement.textContent = `Temperature: ${data.dataseries[0].temp2m}°C`;
+        weatherDescriptionElement.textContent = `Weather: ${data.dataseries[0].weather}`;
+
+        const weatherCode = data.dataseries[0].weather;
+        const weatherIconFileName = `../weather-icons/${weatherCode}.png`;
+        weatherIconElement.src = weatherIconFileName;
+        weatherIconElement.alt = `Weather Icon: ${weatherCode}`;
     } catch (error) {
         console.error('Error fetching weather data:', error);
     }
