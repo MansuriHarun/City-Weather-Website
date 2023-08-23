@@ -13,7 +13,12 @@
             <option value="" disabled selected>Select a city</option>
             <!-- Populate options dynamically using JavaScript -->
         </select>
-        <div id="weatherInfo"></div>
+            <div id="weatherInfo" class="weather-info">
+                <h2>Weather in <span id="cityName"></span></h2>
+                <p id="temperature"></p>
+                <p id="weatherDescription"></p>
+                <img id="weatherIcon" src="" alt="Weather Icon">
+            </div>
     </div>
     <script src="js/main.js"></script>
 </body>
